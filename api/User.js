@@ -122,7 +122,7 @@ router.post("/signin", (req, res) => {
                         })
                     } else {
                         res.json({
-                            status: "SUCCESS",
+                            status: "FAILED",
                             message: "Invalid password enterd"
                         })
                     }
