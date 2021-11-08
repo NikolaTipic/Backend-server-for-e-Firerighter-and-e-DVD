@@ -5,7 +5,7 @@ const router = express.Router();
 const User = require("./../models/User");
 
 //Password handler
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 
 //signup
 router.post("/signup", (req, res) => {
@@ -53,7 +53,7 @@ router.post("/signup", (req, res) => {
 
                 //password handeling
                 const saltRounds = 10;
-                bcrypt.hash(password, saltRounds).then(hashedPassword => {
+                bcryptjs.hash(password, saltRounds).then(hashedPassword => {
                     const newUser = new User({
                         name,
                         email,
@@ -112,7 +112,7 @@ router.post("/signin", (req, res) => {
                 //User exist
 
                 const hashedPassword = data[0].password;
-                bcrypt.compare(password, hashedPassword).then(result => {
+                bcryptjs.compare(password, hashedPassword).then(result => {
                     if (result) {
                         //password match
                         res.json({
