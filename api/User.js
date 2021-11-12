@@ -106,12 +106,13 @@ router.post("/signin", (req, res) => {
         })
     } else {
         //check if user exist
-        User.find({email})
+        
+        User.findOne({email})
         .then((data) => {
-            if (data.length) {
+            if (null !== data) {
                 //User exist
 
-                const hashedPassword = data[0].password;
+                const hashedPassword = data.password;
                 bcryptjs.compare(password, hashedPassword).then(result => {
                     if (result) {
                         //password match
