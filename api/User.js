@@ -9,11 +9,13 @@ const bcryptjs = require("bcryptjs");
 
 //signup
 router.post("/signup", (req, res) => {
-    let {name, email, password, dateOfBirth} = req.body;
+    let {name, email, password, dateOfBirth, availability} = req.body;
     name = name.trim();
     email= email.trim();
     password = password.trim();
     dateOfBirth = dateOfBirth.trim();
+    availability = false;
+    
 
     if(name == "" || email == "" || password == "" || dateOfBirth == "") {
         res.json({
@@ -150,5 +152,24 @@ router.post("/signin", (req, res) => {
     }
 
 });
+
+//availability
+router.post("/availability", (req, res) => {
+    let { availability } = req.body;
+    
+    if(availability) {
+        res.json({
+            status: "TRUE",
+            message: "You are available !"
+        })
+    } else {
+        res.json({
+            status: "FALSE",
+            message: "You are unavailable !"
+        })
+    }
+
+});
+
 
 module.exports = router;
