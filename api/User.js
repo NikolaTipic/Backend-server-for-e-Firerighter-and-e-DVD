@@ -9,12 +9,12 @@ const bcryptjs = require("bcryptjs");
 
 //signup
 router.post("/signup", (req, res) => {
-    let {name, email, password, dateOfBirth, availability} = req.body;
+    let {name, email, password, dateOfBirth} = req.body;
     name = name.trim();
     email= email.trim();
     password = password.trim();
     dateOfBirth = dateOfBirth.trim();
-    availability = availability;
+    
     
 
     if(name == "" || email == "" || password == "" || dateOfBirth == "") {
