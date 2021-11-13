@@ -14,7 +14,7 @@ router.post("/signup", (req, res) => {
     email= email.trim();
     password = password.trim();
     dateOfBirth = dateOfBirth.trim();
-    availability = false;
+    availability = availability;
     
 
     if(name == "" || email == "" || password == "" || dateOfBirth == "") {
@@ -60,7 +60,8 @@ router.post("/signup", (req, res) => {
                         name,
                         email,
                         password: hashedPassword,
-                        dateOfBirth
+                        dateOfBirth,
+                        availability: false
                     });
 
                     newUser.save().then(result => {
