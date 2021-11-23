@@ -168,7 +168,7 @@ router.post("/availability", (req, res) => {
     } else {
         //check if user exist
         
-        User.findOneAndUpdate({email: email}, {availability: availability}, {new: true}, (error, data) => {
+        User.findOneAndUpdate({email: email}, {availability: !availability}, {new: true}, (error, data) => {
             if(error) {
                 console.log(error);
             } else {
