@@ -154,23 +154,35 @@ router.post("/signin", (req, res) => {
 
 });
 
-//availability
+
+//Availability
 router.post("/availability", (req, res) => {
-    let { availability } = req.body;
-    
-    if(availability) {
+    let { email, availability } = req.body;
+    email= email.trim();
+
+    if (email == "") {
         res.json({
-            status: "TRUE",
-            message: "You are available !"
+            status: "FAILED",
+            message: "Empty email supplied"
         })
     } else {
-        res.json({
-            status: "FALSE",
-            message: "You are unavailable !"
-        })
-    }
+        //check if user exist
+        
+        User.findOneAndUpdate({email: email}, {availability: availability}, {new: true}, (error, data) => {
+            if(error) {
+                console.log(error);
+            } else {
+                res.json({
+                    status: "SUCCESS",
+                    message: "Update successful",
+                    data: data
+                });
+            }
 
+        });
+    }
 });
+
 
 
 module.exports = router;
