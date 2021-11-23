@@ -184,5 +184,36 @@ router.post("/availability", (req, res) => {
 });
 
 
+//List
+router.post("/list", (req, res) => {
+    let { list } = req.body;
+
+        
+    User.find({availability: list}).then(result =>{
+        if (result.length) {
+            res.json({
+                status: "SUCCESS",
+                message: "Available users retrived",
+                data: [result]
+            })
+        } else {
+            res.json({
+                status: "FAILED",
+                message: "No users available"
+            })
+        }
+            
+    }).catch(err => {
+        console.log(err);
+        res.json({
+            status: "FAILED",
+            message: "An error occurred while retriving list of availble users"
+        })
+    })
+});
+
+    
+
+
 
 module.exports = router;
