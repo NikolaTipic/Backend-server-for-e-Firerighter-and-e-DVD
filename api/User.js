@@ -189,7 +189,7 @@ router.post("/list", (req, res) => {
     let { list } = req.body;
 
         
-    User.find({ list }).then(result =>{
+    User.find({availability: "true"}).then(result =>{
         if (result.length) {
             res.json({
                 status: "SUCCESS",
