@@ -96,6 +96,53 @@ router.post("/signup", (req, res) => {
     }
 });
 
+
+//SignupWithGoogle
+router.post("/googleSignup", (req, res) => {
+    let {name, email} = req.body;
+    name = name.trim();
+    email = email.trim();
+    
+    //checking if user already exist
+    User.findOne({email})
+        .then((data) => {
+            if (null !== data) {
+                res.json({
+                    status: "SUCCESS",
+                    message: "Singin successful",
+                    data: data
+                })
+        } else {
+            const newUser = new User({
+                name,
+                email,
+                password,
+                dateOfBirth,
+                availability: false
+            });
+
+            newUser.save().then(result => {
+                res.json({
+                    status: "SUCCESS",
+                    message: "Signup successful",
+                    data: result,
+                })
+            })
+            .catch(err => {
+                res.json({
+                    status: "FAILED",
+                    message: "An error occurred while saving Goole user account"
+                })
+            })
+
+        }
+
+
+    });
+});
+
+
+
 //Signin
 router.post("/signin", (req, res) => {
     let { email, password } = req.body;
@@ -211,9 +258,5 @@ router.post("/list", (req, res) => {
         })
     })
 });
-
-    
-
-
 
 module.exports = router;
