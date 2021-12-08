@@ -116,8 +116,8 @@ router.post("/googleSignup", (req, res) => {
             const newUser = new User({
                 name,
                 email,
-                password,
-                dateOfBirth,
+                password: "",
+                dateOfBirth: "",
                 availability: false
             });
 
