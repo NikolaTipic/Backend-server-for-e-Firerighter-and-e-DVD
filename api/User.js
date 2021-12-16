@@ -235,6 +235,7 @@ router.post("/availability", (req, res) => {
 router.post("/list", (req, res) => {
     let { list } = req.body;
 
+    console.log("Pozvao si");
         
     User.find({availability: "true"}).then(result =>{
         if (result.length) {
